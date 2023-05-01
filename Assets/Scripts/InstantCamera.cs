@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class InstantCamera : MonoBehaviour
 {
     [SerializeField] ICScene[] iCScenes = new ICScene[3];
+    [SerializeField] String startText;
     [SerializeField] GameObject cameraButton;
     [SerializeField] Image flash, mainImage, itemLarge;
     [SerializeField] TypeWritter typeWritter;
@@ -40,7 +41,7 @@ public class InstantCamera : MonoBehaviour
 
     public void StartGame()
     {
-        typeWritter.StartTypeWrite(iCScenes[0].Text);
+        typeWritter.StartTypeWrite(startText);
         cameraButton.GetComponent<ButtonWiggle>().WiggleInSeconds(8f);
         cameraButton.GetComponent<Button>().onClick.AddListener(OnCameraButtonPressed);
     }
@@ -58,12 +59,6 @@ public class InstantCamera : MonoBehaviour
         if (CurrentScene != null && !CurrentScene.ScenePassed)
             return;
 
-        Debug.Log("Next scene");
-        if (CurrentScene != null)
-        {
-            Debug.Log(CurrentScene.ScenePassed);
-        }
-
         if (CurrentScene != null)
         {
             // clear previous scene items
@@ -72,16 +67,11 @@ public class InstantCamera : MonoBehaviour
                 item.ItemGameObject.SetActive(false);
             }
             itemLarge.enabled = false;
-
-            // clear text
-            typeWritter.Clear();
-
-            StartCoroutine(NewScene(true));
         }
-        else
-        {
-            StartCoroutine(NewScene(false));
-        }
+        // clear text
+        typeWritter.Clear();
+
+        StartCoroutine(NewScene());
     }
 
     IEnumerator IntroEnd()
@@ -94,7 +84,7 @@ public class InstantCamera : MonoBehaviour
         mainMenu.Init();
     }
 
-    IEnumerator NewScene(bool typewrite)
+    IEnumerator NewScene()
     {
         sceneIdx++;
         yield return Utils.ImageFade(flash, 0.1f, 1);
@@ -108,11 +98,10 @@ public class InstantCamera : MonoBehaviour
             Button button = item.ItemGameObject.GetComponent<Button>();
             button.onClick.AddListener(() => OnObjectClicked(item.ItemGameObject));
             ButtonWiggle wiggle = item.ItemGameObject.GetComponent<ButtonWiggle>();
-            wiggle.WiggleInSeconds(8f);
+            wiggle.WiggleInSeconds(10f);
         }
 
-        if (typewrite)
-            typeWritter.StartTypeWrite(CurrentScene.Text);
+        typeWritter.StartTypeWrite(CurrentScene.Text);
         yield return Utils.ImageFade(flash, 1f, 0);
     }
 
@@ -128,7 +117,7 @@ public class InstantCamera : MonoBehaviour
                 if (CurrentScene.ScenePassed && sceneIdx + 1 != iCScenes.Length)
                 {
                     Debug.Log("wiggle camera button in 5 seconds");
-                    cameraButton.GetComponent<ButtonWiggle>().WiggleInSeconds(5f);
+                    cameraButton.GetComponent<ButtonWiggle>().WiggleInSeconds(8f);
                 }
                 return;
             }

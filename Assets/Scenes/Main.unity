@@ -356,8 +356,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
-  m_fontSizeBase: 26
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -368,7 +368,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 24.73
+  m_lineSpacing: 38.21
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -905,7 +905,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 32b217cc107279440b42285cf5d0cbd8, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -2449,27 +2449,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iCScenes:
   - ICImage: {fileID: 21300000, guid: dc46cebd42f6ffa448ec0de0e887e893, type: 3}
-    Text: "\u9A6C\u4E0A\u5C31\u5230\u4E86\u4EBA\u751F\u7684\u65B0\u8D77\u70B9\uFF0C  
-      \n\u4E5F\u8BB8\u6211\u5E94\u8BE5\u7528\u76F8\u673A\u8BB0\u5F55\u4E0B\u65B0\u751F\u6D3B\u3002"
+    Text: "\u4ECA\u5929\u662F\u51FA\u9662\u7684\u65E5\u5B50\uFF0C\u5E94\u8BE5\u662F\u5F00\u5FC3\u7684\u65E5\u5B50\uFF0C\u6211\u5374\u6D51\u8EAB\u6CA1\u52B2\uFF0C\u8111\u888B\u7A7A\u7A7A\u3002\u4F46\uFF0C\u603B\u662F\u4E00\u4E2A\u65B0\u7684\u5F00\u59CB\u3002"
     items:
     - ItemGameObject: {fileID: 1319367626}
       ItemDetailSprite: {fileID: 21300000, guid: 6855e3cd0731ce04491aa6d749a6c294, type: 3}
     - ItemGameObject: {fileID: 766305726}
       ItemDetailSprite: {fileID: 21300000, guid: 3c93d23c092f9bb448e9d58a9f7ccb35, type: 3}
   - ICImage: {fileID: 21300000, guid: 371ef6ba774236d46a23e955b330676d, type: 3}
-    Text: "\u9A6C\u4E0A\u5C31\u5230\u4E86\u4EBA\u751F\u7684\u65B0\u8D77\u70B9\uFF0C\n\u4E5F\u8BB8\u6211\u5E94\u8BE5\u7528\u76F8\u673A\u8BB0\u5F55\u4E0B\u65B0\u751F\u6D3B\uFF1F"
+    Text: "\u4ECA\u5929\u5916\u7525\u4E00\u5BB6\u6765\u770B\u671B\u6211\uFF0C\u4F46\u773C\u795E\u8BA9\u6211\u6709\u4E9B\u5FC3\u91CC\u53D1\u6035\uFF0C\u4EE5\u540E\u5BB6\u91CC\u2026\u4E0D\u8981\u518D\u6765\u4EBA\u4E86\u3002"
     items:
     - ItemGameObject: {fileID: 483796090}
       ItemDetailSprite: {fileID: 21300000, guid: 3b0a07872fa555c4689e7f736833f85f, type: 3}
     - ItemGameObject: {fileID: 1126137355}
       ItemDetailSprite: {fileID: 21300000, guid: 77e2ade9a6fc08245bb3855cd9b0961c, type: 3}
   - ICImage: {fileID: 21300000, guid: 389d08ea91375bd4fb7933671122efbf, type: 3}
-    Text: "\u9A6C\u4E0A\u5C31\u5230\u4E86\u4EBA\u751F\u7684\u65B0\u8D77\u70B9\uFF0C\n\u4E5F\u8BB8\u6211\u5E94\u8BE5\u7528\u76F8\u673A\u8BB0\u5F55\u4E0B\u65B0\u751F\u6D3B\uFF1F\uFF1F\uFF1F"
+    Text: "\u7236\u4EB2\u53BB\u4E16\u540E\uFF0C\u6211\u5F88\u75DB\u82E6\uFF0C\u540E\u6094\u66FE\u7ECF\u548C\u4ED6\u5173\u7CFB\u95F9\u50F5\uFF0C\u603B\u628A\u81EA\u5DF1\u9501\u5728\u623F\u95F4\u91CC\u3002"
     items:
     - ItemGameObject: {fileID: 1185750453}
       ItemDetailSprite: {fileID: 21300000, guid: 0879747e09674c744b9b98c2f7de9b06, type: 3}
     - ItemGameObject: {fileID: 1931047260}
       ItemDetailSprite: {fileID: 21300000, guid: 3f7953ed18b235b4ca41ac867c17b0af, type: 3}
+  startText: "\u9A6C\u4E0A\u5C31\u5230\u4E86\u4E00\u4E2A\u4EBA\u751F\u7684\u5C0F\u5C0F\u8F6C\u6298\u70B9\uFF0C\u4E5F\u8BB8\u6211\u5E94\u8BE5\u7528\u76F8\u673A\u8BB0\u5F55\u4E0B\u3002"
   cameraButton: {fileID: 918472552}
   flash: {fileID: 2115081273}
   mainImage: {fileID: 281256067}
@@ -3658,8 +3658,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 409.01, y: -158.79}
-  m_SizeDelta: {x: 257.4, y: 169.38}
+  m_AnchoredPosition: {x: 412.59, y: -159.3}
+  m_SizeDelta: {x: 250.24, y: 233.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2058261341
 MonoBehaviour:
