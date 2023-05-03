@@ -52,6 +52,7 @@ public class InstantCamera : MonoBehaviour
         if (sceneIdx + 1 == iCScenes.Length)
         {
             Debug.Log("intro ends");
+            cameraButton.GetComponent<Button>().onClick.RemoveAllListeners();
             StartCoroutine(IntroEnd());
             return;
         }

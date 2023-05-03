@@ -9,6 +9,11 @@ public class TypeWritter : MonoBehaviour
 
     IEnumerator typeWriteCoroutine;
 
+    void Awake()
+    {
+        Clear();    
+    }
+
     public void StartTypeWrite(string text)
     {
         if (typeWriteCoroutine != null)

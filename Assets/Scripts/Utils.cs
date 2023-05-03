@@ -17,6 +17,7 @@ public class Utils : MonoBehaviour
             image.color = new Color(brightness, brightness, brightness, alpha);
             yield return null;
         }
+        image.color = new Color(brightness, brightness, brightness, targetAlpha);
     }
 
     public static IEnumerator UIFade(GameObject go, float duration, float targetAlpha)
@@ -32,6 +33,42 @@ public class Utils : MonoBehaviour
             currentTime += Time.unscaledDeltaTime;
             float alpha = Mathf.Lerp(startAlpha, targetAlpha, currentTime / duration);
             renderer.SetAlpha(alpha);
+            yield return null;
+        }
+    }
+
+    public static IEnumerator UIScale(RectTransform transform, float duration, Vector2 _targetScale)
+    {
+        Vector3 targetScale = new(_targetScale.x, _targetScale.y, transform.localScale.z);
+        float currentTime = 0;
+        Vector2 startScale = transform.localScale;
+        while (currentTime < duration)
+        {
+            currentTime += Time.unscaledDeltaTime;
+            transform.localScale = Vector3.Lerp(startScale, targetScale, currentTime / duration);
+            yield return null;
+        }
+    }
+
+    public static IEnumerator ObjectMoveWithDuration(Transform transform, float duration, Vector2 _targetPos)
+    {
+        Vector3 targetPos = new(_targetPos.x, _targetPos.y, transform.localPosition.z);
+        float currentTime = 0;
+        Vector2 startPos = transform.localPosition;
+        while (currentTime < duration)
+        {
+            currentTime += Time.unscaledDeltaTime;
+            transform.localPosition = Vector3.Lerp(startPos, targetPos, currentTime / duration);
+            yield return null;
+        }
+    }
+
+    public static IEnumerator ObjectMoveWithSpeed(Transform transform, float speed, Vector2 _targetPos)
+    {
+        Vector3 targetPos = new(_targetPos.x, _targetPos.y, transform.localPosition.z);
+        while (transform.localPosition != targetPos)
+        {
+            transform.localPosition = Vector3.MoveTowards(transform.localPosition, targetPos, speed * Time.unscaledDeltaTime);
             yield return null;
         }
     }
