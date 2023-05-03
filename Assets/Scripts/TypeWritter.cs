@@ -1,17 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class TypeWritter : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI text;
-
     IEnumerator typeWriteCoroutine;
+    Text text;
 
     void Awake()
     {
-        Clear();    
+        text = GetComponent<Text>();
+        Clear();
     }
 
     public void StartTypeWrite(string text)

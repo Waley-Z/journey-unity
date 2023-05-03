@@ -25,7 +25,7 @@ public class LevelOne : MonoBehaviour
     IEnumerator flickering;
     int bubbleDestroyed = 0;
 
-    void Start()
+    void Awake()
     {
         foreach (Image img in objectsToShowFirst)
         {
