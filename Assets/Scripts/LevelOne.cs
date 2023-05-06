@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LevelOne : MonoBehaviour
 {
     [SerializeField] List<Image> objectsToShowFirst, objectsToShowSecond;
+    [SerializeField] List<UIMove> objectsToMove = new();
+
     [SerializeField] TypeWritter typeWritter;
     [SerializeField, TextArea] string[] texts = new string[4];
 
@@ -14,16 +17,14 @@ public class LevelOne : MonoBehaviour
 
     [SerializeField] Transform greenBubbles, redBubbles;
 
-    [SerializeField] StickMan man1, man2;
-
     [SerializeField] Image guide, bottle;
 
     [SerializeField] Bottle bottleLarge;
 
-    [SerializeField] MainMenu mainMenu;
+    [SerializeField] GameObject man1Prefab, man2Prefab;
 
+    StickMan man1, man2;
     IEnumerator flickering;
-    int bubbleDestroyed = 0;
 
     void Awake()
     {
@@ -36,16 +37,19 @@ public class LevelOne : MonoBehaviour
         {
             StartCoroutine(Utils.ImageFade(img, 0, 0f));
         }
-        man1.gameObject.SetActive(false);
-        man2.gameObject.SetActive(false);
-
-        //Init();
     }
 
-    public void Init()
+    void Start()
     {
-        mainMenu.gameObject.SetActive(false);
         StartCoroutine(StartLevel());
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine(LevelOneEnd());
+        }
     }
 
     IEnumerator StartLevel()
@@ -54,7 +58,7 @@ public class LevelOne : MonoBehaviour
         {
             StartCoroutine(Utils.ImageFade(img, 1f, 1f));
         }
-        
+
         yield return new WaitForSeconds(2f);
 
         foreach (Image img in objectsToShowSecond)
@@ -106,8 +110,9 @@ public class LevelOne : MonoBehaviour
 
     IEnumerator StartStickMen()
     {
-        man1.gameObject.SetActive(true);
-        man2.gameObject.SetActive(true);
+        man1 = Instantiate(man1Prefab).GetComponent<StickMan>();
+        man2 = Instantiate(man2Prefab).GetComponent<StickMan>();
+
         yield return new WaitForSeconds(3f);
         Coroutine walk2 = StartCoroutine(man2.StartWalk());
         yield return new WaitForSeconds(1f);
@@ -142,6 +147,34 @@ public class LevelOne : MonoBehaviour
         StartCoroutine(Utils.ImageFade(bottle, 1f, 1f));
     }
 
+    IEnumerator LevelOneEnd()
+    {
+        typeWritter.StartTypeWrite(texts[3]);
+
+        yield return new WaitForSeconds(1f);
+
+        if (man1 && man2)
+        {
+            Coroutine walk1 = StartCoroutine(man1.ReturnWalk());
+            Coroutine walk2 = StartCoroutine(man2.ReturnWalk());
+            yield return walk1;
+            yield return walk2;
+            Destroy(man1.gameObject);
+            Destroy(man2.gameObject);
+        }
+
+        yield return new WaitForSeconds(5f);
+        foreach (UIMove move in objectsToMove)
+        {
+            move.MoveOut();
+        }
+
+        GameManager.Instance.LoadSceneInSeconds(SceneType.MainMenu, 3f);
+
+        yield return new WaitForSeconds(3f);
+        Destroy(gameObject);
+    }
+
     IEnumerator ScaleBubbles(bool isUp, UIScale[] scales, float minDuration = 2f, float maxDuration = 4f)
     {
         foreach (var scale in scales)
@@ -159,10 +192,9 @@ public class LevelOne : MonoBehaviour
 
     public void OnBubbleDestroyed()
     {
-        bubbleDestroyed++;
-        if (bubbleDestroyed == redBubbles.GetComponentsInChildren<UIScale>().Length)
+        if (GameObject.FindGameObjectsWithTag("RedBubble").Length <= 1)
         {
-            typeWritter.StartTypeWrite(texts[3]);
+            StartCoroutine(LevelOneEnd());
         }
     }
 }

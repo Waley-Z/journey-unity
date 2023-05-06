@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,8 +9,15 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameObject[] levelButtons = new GameObject[3];
     [SerializeField] Image[] levelTexts = new Image[3];
     [SerializeField] List<UIMove> objectsToMove = new();
-    [SerializeField] Ghost ghost;
-    [SerializeField] LevelOne levelOne;
+
+    Image ghost
+    {
+        get
+        {
+            InstantCamera ic = FindObjectOfType<InstantCamera>();
+            return ic ? ic.ghost : null;
+        }
+    }
 
     void Awake()
     {
@@ -17,6 +25,22 @@ public class MainMenu : MonoBehaviour
         {
             int _i = i;
             levelButtons[i].GetComponent<Button>().onClick.AddListener(() => OnLevelButtonPressed(_i));
+        }
+    }
+
+    void Start()
+    {
+        foreach (UIMove move in objectsToMove)
+        {
+            move.MoveIn();
+        }
+        for (int i = 0; i < levelButtons.Length; i++)
+        {
+            levelButtons[i].GetComponent<UIMove>().MoveIn();
+            if (i > GameManager.Instance.Progress)
+            {
+                levelButtons[i].GetComponent<Button>().interactable = false;
+            }
         }
     }
 
@@ -43,33 +67,11 @@ public class MainMenu : MonoBehaviour
         yield return new WaitForSeconds(3f);
         StartCoroutine(Utils.ImageFade(levelTexts[i], 1f, 0f));
         StartCoroutine(Utils.ImageFade(levelButtons[i].GetComponent<Image>(), 1f, 0f));
-        StartCoroutine(Utils.ImageFade(ghost.image, 1f, 0f));
-        yield return new WaitForSeconds(3f);
+        StartCoroutine(Utils.ImageFade(ghost, 1f, 0f));
 
-        switch (i)
-        {
-            case 0:
-                levelOne.gameObject.SetActive(true);
-                levelOne.Init();
-                break;
-            case 1:
-                //UnityEngine.SceneManagement.SceneManager.LoadScene("Level2");
-                break;
-            case 2:
-                //UnityEngine.SceneManagement.SceneManager.LoadScene("Level3");
-                break;
-        }
-    }
+        GameManager.Instance.LoadSceneInSeconds((SceneType)(i + 1), 3f);
 
-    public void Init()
-    {
-        foreach (UIMove move in objectsToMove)
-        {
-            move.MoveIn();
-        }
-        foreach (GameObject btn in levelButtons)
-        {
-            btn.GetComponent<UIMove>().MoveIn();
-        }
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
     }
 }

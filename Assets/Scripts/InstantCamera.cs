@@ -12,8 +12,8 @@ public class InstantCamera : MonoBehaviour
     [SerializeField] Image flash, mainImage, itemLarge;
     [SerializeField] TypeWritter typeWritter;
     [SerializeField] List<UIMove> objectsToMove = new();
-    [SerializeField] Image ghost;
-    [SerializeField] MainMenu mainMenu;
+
+    public Image ghost;
 
     int sceneIdx = -1;
     ICScene CurrentScene
@@ -81,8 +81,8 @@ public class InstantCamera : MonoBehaviour
         foreach (var obj in objectsToMove)
             obj.MoveOut();
         ghost.GetComponent<Ghost>().MoveToSide();
-        yield return new WaitForSeconds(3f);
-        mainMenu.Init();
+
+        GameManager.Instance.LoadSceneInSeconds(SceneType.MainMenu, 3f);
     }
 
     IEnumerator NewScene()

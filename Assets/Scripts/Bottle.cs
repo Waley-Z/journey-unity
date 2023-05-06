@@ -48,15 +48,10 @@ public class Bottle : MonoBehaviour, IDragHandler
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        UIScale scale = other.GetComponent<UIScale>();
-        if (scale != null)
+        if (other.CompareTag("RedBubble"))
         {
-            scale.Scale(false, 0.5f, 1f);
-            scale.GetComponent<Rigidbody2D>().simulated = false;
-            if (other.CompareTag("RedBubble"))
-            {
-                levelOne.OnBubbleDestroyed();
-            }
+            Destroy(other.gameObject);
+            levelOne.OnBubbleDestroyed();
         }
     }
 }

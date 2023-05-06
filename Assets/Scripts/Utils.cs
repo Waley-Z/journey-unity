@@ -8,6 +8,9 @@ public class Utils : MonoBehaviour
 {
     public static IEnumerator ImageFade(Image image, float duration, float targetAlpha, float brightness = 1)
     {
+        if (image == null)
+            yield break;
+
         float currentTime = 0;
         float startAlpha = image.color.a;
         while (currentTime < duration)
