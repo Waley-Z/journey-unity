@@ -69,7 +69,7 @@ public class LevelOne : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         typeWritter.StartTypeWrite(texts[0]);
-        flickering = StartFlickering(12f);
+        flickering = StartFlickering(10f);
         StartCoroutine(flickering);
         yield return null;
     }
@@ -163,7 +163,7 @@ public class LevelOne : MonoBehaviour
             Destroy(man2.gameObject);
         }
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(6f);
         foreach (UIMove move in objectsToMove)
         {
             move.MoveOut();
