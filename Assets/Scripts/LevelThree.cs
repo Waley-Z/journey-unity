@@ -81,7 +81,7 @@ public class LevelThree : MonoBehaviour
             move.MoveOut();
         }
 
-        GameManager.Instance.LoadSceneInSeconds(SceneType.MainMenu, 3f);
+        GameManager.Instance.LoadSceneInSeconds(SceneType.Outro, 3f);
 
         yield return new WaitForSeconds(3f);
         Destroy(gameObject);

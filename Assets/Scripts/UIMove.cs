@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UIMove : MonoBehaviour
 {
-    [SerializeField] Vector2 inPosition, outPosition;
+    public Vector2 inPosition, outPosition;
 
     RectTransform rectTransform;
     IEnumerator moveCoroutine;

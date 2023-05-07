@@ -37,7 +37,7 @@ public class TypeWritter : MonoBehaviour
         }
     }
 
-    public void Clear()
+    public void Clear() 
     {
         if (typeWriteCoroutine != null)
             StopCoroutine(typeWriteCoroutine);

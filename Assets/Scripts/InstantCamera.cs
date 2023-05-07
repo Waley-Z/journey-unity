@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,12 +6,13 @@ using UnityEngine.UI;
 
 public class InstantCamera : MonoBehaviour
 {
-    [SerializeField] ICScene[] iCScenes = new ICScene[3];
+    [SerializeField] ICScene[] iCScenes;
     [SerializeField] string startText;
     [SerializeField] GameObject cameraButton;
     [SerializeField] Image flash, mainImage, itemLarge;
     [SerializeField] TypeWritter typeWritter;
     [SerializeField] List<UIMove> objectsToMove = new();
+    [SerializeField] Outro outro;
 
     public Image ghost;
 
@@ -50,9 +52,11 @@ public class InstantCamera : MonoBehaviour
         // end of intro
         if (sceneIdx + 1 == iCScenes.Length)
         {
-            Debug.Log("intro ends");
             cameraButton.GetComponent<Button>().onClick.RemoveAllListeners();
-            StartCoroutine(IntroEnd());
+            if (outro != null)
+                StartCoroutine(OutroEnd());
+            else
+                StartCoroutine(IntroEnd());
             return;
         }
 
@@ -82,6 +86,17 @@ public class InstantCamera : MonoBehaviour
         ghost.GetComponent<Ghost>().MoveToSide();
 
         GameManager.Instance.LoadSceneInSeconds(SceneType.MainMenu, 3f);
+    }
+
+    IEnumerator OutroEnd()
+    {
+        foreach (var obj in objectsToMove)
+            obj.MoveOut();
+        foreach (UIMove move in FindObjectOfType<Background>().moves)
+            move.MoveOut();
+
+        GameManager.Instance.LoadSceneInSeconds(SceneType.MainMenu, 3f);
+        yield return StartCoroutine(outro.OutroEnd());
     }
 
     IEnumerator NewScene()
@@ -114,7 +129,9 @@ public class InstantCamera : MonoBehaviour
                 itemLarge.enabled = true;
                 itemLarge.sprite = item.ItemDetailSprite;
                 item.Pressed = true;
-                if (CurrentScene.ScenePassed && sceneIdx + 1 != iCScenes.Length)
+                if (item.ItemText != "")
+                    typeWritter.StartTypeWrite(item.ItemText);
+                if (CurrentScene.ScenePassed)
                 {
                     Debug.Log("wiggle camera button in 5 seconds");
                     cameraButton.GetComponent<ButtonWiggle>().WiggleInSeconds(8f);
@@ -152,6 +169,8 @@ public class ICItem
 {
     public GameObject ItemGameObject;
     public Sprite ItemDetailSprite;
-    [System.NonSerialized]
+    [TextArea]
+    public string ItemText;
+    [NonSerialized]
     public bool Pressed = false;
 }
