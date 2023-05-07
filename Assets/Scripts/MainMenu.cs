@@ -35,6 +35,7 @@ public class MainMenu : MonoBehaviour
         }
         for (int i = 0; i < levelButtons.Length; i++)
         {
+            levelButtons[i].GetComponent<Image>().alphaHitTestMinimumThreshold = 0.5f;
             levelButtons[i].GetComponent<UIMove>().MoveIn();
             if (i > GameManager.Instance.Progress)
             {

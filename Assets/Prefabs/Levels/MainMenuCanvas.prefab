@@ -559,7 +559,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1948787655440127906, guid: b720e2b06877ddd41877892f79e37046, type: 3}
       propertyPath: outPosition.x
-      value: 600
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 1948787655440127906, guid: b720e2b06877ddd41877892f79e37046, type: 3}
       propertyPath: outPosition.y
