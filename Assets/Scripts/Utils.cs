@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
+using PathCreation;
 
 public class Utils : MonoBehaviour
 {
@@ -72,6 +72,19 @@ public class Utils : MonoBehaviour
         while (transform.localPosition != targetPos)
         {
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, targetPos, speed * Time.unscaledDeltaTime);
+            yield return null;
+        }
+    }
+
+    public static IEnumerator ObjectFollowPath(Transform transform, float speed, PathCreator path)
+    {
+        if (path == null)
+            yield break;
+        float distanceTravelled = 0;
+        while (distanceTravelled < path.path.length)
+        {
+            distanceTravelled += speed * Time.unscaledDeltaTime;
+            transform.position = path.path.GetPointAtDistance(distanceTravelled);
             yield return null;
         }
     }

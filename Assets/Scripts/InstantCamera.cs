@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +6,7 @@ using UnityEngine.UI;
 public class InstantCamera : MonoBehaviour
 {
     [SerializeField] ICScene[] iCScenes = new ICScene[3];
-    [SerializeField] String startText;
+    [SerializeField] string startText;
     [SerializeField] GameObject cameraButton;
     [SerializeField] Image flash, mainImage, itemLarge;
     [SerializeField] TypeWritter typeWritter;

@@ -7,6 +7,7 @@ public class TypeWritter : MonoBehaviour
 {
     IEnumerator typeWriteCoroutine;
     Text text;
+    string currentFullText;
 
     void Awake()
     {
@@ -14,11 +15,14 @@ public class TypeWritter : MonoBehaviour
         Clear();
     }
 
-    public void StartTypeWrite(string text)
+    public void StartTypeWrite(string _text)
     {
+        if (currentFullText == _text)
+            return;
+        currentFullText = _text;
         if (typeWriteCoroutine != null)
             StopCoroutine(typeWriteCoroutine);
-        typeWriteCoroutine = TypeWrite(text);
+        typeWriteCoroutine = TypeWrite(_text);
         StartCoroutine(typeWriteCoroutine);
     }
 

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -48,7 +47,7 @@ public class LevelOne : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            StartCoroutine(LevelOneEnd());
+            StartCoroutine(EndLevel());
         }
     }
 
@@ -147,7 +146,7 @@ public class LevelOne : MonoBehaviour
         StartCoroutine(Utils.ImageFade(bottle, 1f, 1f));
     }
 
-    IEnumerator LevelOneEnd()
+    IEnumerator EndLevel()
     {
         typeWritter.StartTypeWrite(texts[3]);
 
@@ -194,7 +193,7 @@ public class LevelOne : MonoBehaviour
     {
         if (GameObject.FindGameObjectsWithTag("RedBubble").Length <= 1)
         {
-            StartCoroutine(LevelOneEnd());
+            StartCoroutine(EndLevel());
         }
     }
 }

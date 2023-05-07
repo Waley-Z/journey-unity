@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -73,5 +72,10 @@ public class MainMenu : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
+        InstantCamera ic = FindObjectOfType<InstantCamera>();
+        if (ic)
+        {
+            Destroy(ic.transform.parent.gameObject);
+        }
     }
 }
