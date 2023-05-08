@@ -68,7 +68,7 @@ public class LevelOne : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         typeWritter.StartTypeWrite(texts[0]);
-        flickering = StartFlickering(10f);
+        flickering = StartFlickering(0);
         StartCoroutine(flickering);
         yield return null;
     }

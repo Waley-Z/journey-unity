@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iCScenes:
-  - ICImage: {fileID: 21300000, guid: 51125592f4ae66d418e535accdca9664, type: 3}
+  - ICImage: {fileID: 21300000, guid: fa2a9dbdd939adf4aafdb3faf016a443, type: 3}
     Text: 
     items:
     - ItemGameObject: {fileID: 8312452931127941386}
@@ -535,8 +535,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 32.26, y: 31.15}
-  m_SizeDelta: {x: 452.34, y: 452.15}
+  m_AnchoredPosition: {x: 33.202904, y: 16.998}
+  m_SizeDelta: {x: 450.4542, y: 480.4519}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5263746861115802970
 CanvasRenderer:
@@ -566,7 +566,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 51125592f4ae66d418e535accdca9664, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fa2a9dbdd939adf4aafdb3faf016a443, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

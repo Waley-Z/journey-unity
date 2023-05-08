@@ -7,8 +7,11 @@ using UnityEngine.UI;
 public class Ghost : MonoBehaviour
 {
     [SerializeField] float spriteInterval = 0.2f;
-    [SerializeField] List<Sprite> sprites = new();
+    [SerializeField] List<Sprite> speakSprites = new();
+    [SerializeField] List<Sprite> staticSprites = new();
+
     [SerializeField] Vector2 endPos;
+    [SerializeField] TypeWritter typeWritter;
 
     [NonSerialized] public Image image;
     float countdown;
@@ -25,7 +28,11 @@ public class Ghost : MonoBehaviour
     {
         if (countdown <= 0)
         {
-            image.sprite = sprites[spriteIndex++ % sprites.Count];
+            if (typeWritter && typeWritter.IsTyping)
+                image.sprite = speakSprites[spriteIndex++ % speakSprites.Count];
+            else
+                image.sprite = staticSprites[spriteIndex++ % staticSprites.Count];
+
             countdown = spriteInterval;
         }
         else
