@@ -23,12 +23,8 @@ public class Utils : MonoBehaviour
         image.color = new Color(brightness, brightness, brightness, targetAlpha);
     }
 
-    public static IEnumerator UIFade(GameObject go, float duration, float targetAlpha)
+    public static IEnumerator UIFade(CanvasRenderer renderer, float duration, float targetAlpha)
     {
-        CanvasRenderer renderer = go.GetComponent<CanvasRenderer>();
-        if (renderer == null)
-            yield break;
-
         float currentTime = 0;
         float startAlpha = renderer.GetAlpha();
         while (currentTime < duration)

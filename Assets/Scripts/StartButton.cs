@@ -19,7 +19,10 @@ public class StartButton : MonoBehaviour
     {
         foreach (GameObject go in gameObjectsToFade)
         {
-            StartCoroutine(Utils.UIFade(go, 1f, 0f));
+            foreach (CanvasRenderer renderer in go.GetComponentsInChildren<CanvasRenderer>())
+            {
+                StartCoroutine(Utils.UIFade(renderer, 1f, 0f));
+            }
         }
         StartCoroutine(Utils.ImageFade(cameraButton, 1f, 1f));
         StartCoroutine(StartGame());
