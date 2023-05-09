@@ -52,7 +52,11 @@ public class InstantCamera : MonoBehaviour
 
     void OnCameraButtonPressed()
     {
-        // end of intro
+        Debug.Log("OnCameraButtonPressed sceneIdx = " + sceneIdx + ", length = " + iCScenes.Length);
+        if (CurrentScene != null && !CurrentScene.ScenePassed)
+            return;
+
+        // end of intro/outro
         if (sceneIdx + 1 == iCScenes.Length)
         {
             cameraButton.GetComponent<Button>().onClick.RemoveAllListeners();
@@ -62,9 +66,6 @@ public class InstantCamera : MonoBehaviour
                 StartCoroutine(IntroEnd());
             return;
         }
-
-        if (CurrentScene != null && !CurrentScene.ScenePassed)
-            return;
 
         if (CurrentScene != null)
         {
