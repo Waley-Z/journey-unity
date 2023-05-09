@@ -7,6 +7,7 @@ public class LevelTwo : MonoBehaviour
 {
     [SerializeField] List<Image> objectsToShowFirst, objectsToShowSecond;
     [SerializeField] List<UIMove> objectsToMove = new();
+    [SerializeField] List<GameObject> objectsToFadeOut = new();
 
     [SerializeField] TypeWritter typeWritter;
     [SerializeField, TextArea] string[] texts = new string[3];
@@ -16,8 +17,12 @@ public class LevelTwo : MonoBehaviour
     [SerializeField] List<Sprite> normalWoolBallSprites = new();
     [SerializeField] Sprite specialWoolBallSprite;
 
+    [SerializeField] GameObject PaperBalls;
+    [SerializeField] Image note;
+
     bool specialWoolBallSpawned = false;
     int normalWoolBallSpawned = 0;
+    Coroutine showNoteCoroutine;
 
     void Awake()
     {
@@ -47,9 +52,19 @@ public class LevelTwo : MonoBehaviour
 
     IEnumerator StartLevel()
     {
+        foreach (PaperBall paperBall in PaperBalls.GetComponentsInChildren<PaperBall>())
+        {
+            paperBall.OnCollision += () => startShowNote(paperBall.note);
+        }
+
         foreach (Image img in objectsToShowFirst)
         {
             StartCoroutine(Utils.ImageFade(img, 1f, 1f));
+        }
+
+        foreach (GameObject go in objectsToFadeOut)
+        {
+            go.SetActive(false);
         }
 
         yield return new WaitForSeconds(2f);
@@ -67,11 +82,35 @@ public class LevelTwo : MonoBehaviour
         typeWritter.StartTypeWrite(texts[1]);
     }
 
-    IEnumerator EndLevel()
+    void startShowNote(Sprite noteSprite)
     {
+        if (showNoteCoroutine != null)
+            StopCoroutine(showNoteCoroutine);
+
+        note.sprite = noteSprite;
+        showNoteCoroutine = StartCoroutine(ShowNote());
+    }
+
+    IEnumerator ShowNote()
+    {
+        StartCoroutine(Utils.ImageFade(note, 1, 1));
+        yield return new WaitForSeconds(5f);
+        StartCoroutine(Utils.ImageFade(note, 1, 0));
+    }
+
+    public IEnumerator EndLevel()
+    {
+        foreach (GameObject go in objectsToFadeOut)
+        {
+            foreach (Image img in go.GetComponentsInChildren<Image>())
+            {
+                StartCoroutine(Utils.ImageFade(img, 1f, 0f));
+            }
+        }
+
         typeWritter.StartTypeWrite(texts[2]);
 
-        yield return new WaitForSeconds(7f);
+        yield return new WaitForSeconds(15f);
         foreach (UIMove move in objectsToMove)
         {
             move.MoveOut();
@@ -110,6 +149,14 @@ public class LevelTwo : MonoBehaviour
 
     void OnWoolBallClicked()
     {
-
+        foreach (GameObject go in objectsToFadeOut)
+        {
+            go.SetActive(true);
+            foreach (Image img in go.GetComponentsInChildren<Image>())
+            {
+                StartCoroutine(Utils.ImageFade(img, 0f, 0f));
+                StartCoroutine(Utils.ImageFade(img, 1f, 1f));
+            }
+        }
     }
 }

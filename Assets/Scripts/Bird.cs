@@ -15,9 +15,12 @@ public class Bird : MonoBehaviour
     PathCreator path;
     Image image;
     int spriteIndex = 0;
+    bool flying = false;
 
     public IEnumerator Fly()
     {
+        if (flying) yield break;
+        flying = true;
         countdown = 0;
         yield return new WaitForSeconds(2f);
         StartCoroutine(Utils.ObjectFollowPath(transform, 2f, path));

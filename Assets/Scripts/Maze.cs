@@ -21,15 +21,12 @@ public class Maze : MonoBehaviour, IDragHandler, IBeginDragHandler
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("OnBeginDrag");
         oldEulerZ = transform.localRotation.eulerAngles.z;
         oldAngle = Mathf.Atan2(eventData.position.y - screenPos.y, eventData.position.x - screenPos.x) * Mathf.Rad2Deg;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("OnMouseDrag");
-
         if (eventData.dragging)
         {
             float angle = Mathf.Atan2(eventData.position.y - screenPos.y, eventData.position.x - screenPos.x) * Mathf.Rad2Deg;
@@ -38,8 +35,6 @@ public class Maze : MonoBehaviour, IDragHandler, IBeginDragHandler
                 angleDiff -= 360;
             else if (angleDiff < -180)
                 angleDiff += 360;
-
-            print($"{angle}, {oldAngle}, {(angle - oldAngle) % 360}, {angleDiff}");
 
             float eulerZ = oldEulerZ + angleDiff * rotationSpeed;
 

@@ -95,7 +95,7 @@ public class InstantCamera : MonoBehaviour
         foreach (UIMove move in FindObjectOfType<Background>().moves)
             move.MoveOut();
 
-        GameManager.Instance.LoadSceneInSeconds(SceneType.MainMenu, 3f);
+        yield return new WaitForSeconds(1f);
         yield return StartCoroutine(outro.OutroEnd());
     }
 

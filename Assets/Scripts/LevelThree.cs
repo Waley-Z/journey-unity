@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -59,14 +60,10 @@ public class LevelThree : MonoBehaviour
 
     void CheckEndLevel()
     {
-        foreach (Rigidbody2D rb in tags.GetComponentsInChildren<Rigidbody2D>())
+        if (vines.GetComponentsInChildren<Thorn>().Count() <= 1)
         {
-            if (!rb.simulated)
-            {
-                return;
-            }
+            StartCoroutine(EndLevel());
         }
-        StartCoroutine(EndLevel());
     }
 
     IEnumerator EndLevel()

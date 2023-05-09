@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Outro : MonoBehaviour
 {
     [SerializeField] InstantCamera ic;
+    [SerializeField] CanvasGroup theEnd;
 
     void Start()
     {
@@ -12,6 +14,7 @@ public class Outro : MonoBehaviour
         {
             move.MoveIn();
         }
+        StartCoroutine(Utils.CanvasGroupFade(theEnd, 0, 0));
 
         StartCoroutine(StartOutro());
     }
@@ -20,20 +23,21 @@ public class Outro : MonoBehaviour
     {
         CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
         canvasGroup.alpha = 0;
-        float currentTime = 0;
 
-        while (currentTime < 2f)
-        {
-            currentTime += Time.unscaledDeltaTime;
-            canvasGroup.alpha = Mathf.Lerp(0, 1, currentTime / 2f);
-            yield return null;
-        }
+        yield return StartCoroutine(Utils.CanvasGroupFade(canvasGroup, 2f, 1f));
 
         ic.StartGame();
     }
 
     public IEnumerator OutroEnd()
     {
-        yield return null;
+        theEnd.GetComponent<Button>().onClick.AddListener(() => StartCoroutine(OnTheEndClicked()));
+        yield return StartCoroutine(Utils.CanvasGroupFade(theEnd, 2f, 1f));
+    }
+
+    IEnumerator OnTheEndClicked()
+    {
+        yield return StartCoroutine(Utils.CanvasGroupFade(theEnd, 2f, 0f));
+        GameManager.Instance.LoadSceneInSeconds(SceneType.MainMenu, 3f);
     }
 }

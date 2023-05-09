@@ -36,6 +36,20 @@ public class Utils : MonoBehaviour
         }
     }
 
+    public static IEnumerator CanvasGroupFade(CanvasGroup group, float duration, float targetAlpha)
+    {
+        float currentTime = 0;
+        float startAlpha = group.alpha;
+        while (currentTime < duration)
+        {
+            currentTime += Time.unscaledDeltaTime;
+            float alpha = Mathf.Lerp(startAlpha, targetAlpha, currentTime / duration);
+            group.alpha = alpha;
+            yield return null;
+        }
+        group.alpha = targetAlpha;
+    }
+
     public static IEnumerator UIScale(RectTransform transform, float duration, Vector2 _targetScale)
     {
         Vector3 targetScale = new(_targetScale.x, _targetScale.y, transform.localScale.z);
