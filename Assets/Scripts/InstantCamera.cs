@@ -36,7 +36,10 @@ public class InstantCamera : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            StartCoroutine(IntroEnd());
+            if (!outro)
+                StartCoroutine(IntroEnd());
+            else
+                StartCoroutine(OutroEnd());
         }
     }
 
@@ -83,6 +86,8 @@ public class InstantCamera : MonoBehaviour
         yield return Utils.ImageFade(ghost, 2f, 1f);
         foreach (var obj in objectsToMove)
             obj.MoveOut();
+        foreach (UIMove move in FindObjectOfType<Background>().moves)
+            move.MoveOut();
         ghost.GetComponent<Ghost>().MoveToSide();
 
         GameManager.Instance.LoadSceneInSeconds(SceneType.MainMenu, 3f);

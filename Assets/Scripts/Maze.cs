@@ -8,6 +8,8 @@ public class Maze : MonoBehaviour, IDragHandler, IBeginDragHandler
 {
     [SerializeField] Image background;
     [SerializeField] float rotationSpeed = 0.2f;
+    [SerializeField] Rigidbody2D wallCollider;
+    [SerializeField] Transform maze;
 
     float oldAngle;
     float oldEulerZ;
@@ -21,7 +23,7 @@ public class Maze : MonoBehaviour, IDragHandler, IBeginDragHandler
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        oldEulerZ = transform.localRotation.eulerAngles.z;
+        oldEulerZ = wallCollider.rotation;
         oldAngle = Mathf.Atan2(eventData.position.y - screenPos.y, eventData.position.x - screenPos.x) * Mathf.Rad2Deg;
     }
 
@@ -38,7 +40,8 @@ public class Maze : MonoBehaviour, IDragHandler, IBeginDragHandler
 
             float eulerZ = oldEulerZ + angleDiff * rotationSpeed;
 
-            transform.localRotation = Quaternion.Euler(0, 0, eulerZ);
+            wallCollider.MoveRotation(eulerZ);
+            maze.localEulerAngles = new Vector3(0, 0, eulerZ);
             oldAngle = angle;
             oldEulerZ = eulerZ;
         }

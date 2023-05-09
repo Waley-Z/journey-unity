@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameScene[] GameScenes;
 
     public static GameManager Instance;
-    public int Progress = 0; // 0 = main menu, 1 = level 1, 2 = level 2, 3 = level 3, 4 = outro
+    public int Progress = 0; // 0 = intro, 1 = main menu, 2 = level one, 3 = level two, 4 = level three, 5 = outro
 
     void Awake()
     {
@@ -15,6 +15,11 @@ public class GameManager : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
+    }
+
+    void Start()
+    {
+        LoadSceneInSeconds(SceneType.Intro, 0);        
     }
 
     public void LoadSceneInSeconds(SceneType sceneType, float seconds = 0)
@@ -47,6 +52,7 @@ public class GameManager : MonoBehaviour
 
 public enum SceneType
 {
+    Intro,
     MainMenu,
     LevelOne,
     LevelTwo,

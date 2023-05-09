@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,8 @@ public class Outro : MonoBehaviour
         }
         StartCoroutine(Utils.CanvasGroupFade(theEnd, 0, 0));
 
+        theEnd.gameObject.SetActive(false);
+
         StartCoroutine(StartOutro());
     }
 
@@ -31,6 +34,7 @@ public class Outro : MonoBehaviour
 
     public IEnumerator OutroEnd()
     {
+        theEnd.gameObject.SetActive(true);
         theEnd.GetComponent<Button>().onClick.AddListener(() => StartCoroutine(OnTheEndClicked()));
         yield return StartCoroutine(Utils.CanvasGroupFade(theEnd, 2f, 1f));
     }
@@ -38,6 +42,7 @@ public class Outro : MonoBehaviour
     IEnumerator OnTheEndClicked()
     {
         yield return StartCoroutine(Utils.CanvasGroupFade(theEnd, 2f, 0f));
-        GameManager.Instance.LoadSceneInSeconds(SceneType.MainMenu, 3f);
+        GameManager.Instance.LoadSceneInSeconds(SceneType.Intro, 3f);
+        Destroy(gameObject);
     }
 }

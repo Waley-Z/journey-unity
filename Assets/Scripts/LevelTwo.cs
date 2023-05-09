@@ -144,7 +144,7 @@ public class LevelTwo : MonoBehaviour
         Vector3 randomVector3 = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
         woolBall.GetComponent<Rigidbody2D>().velocity = randomVector3.normalized * Random.Range(1f, 2.5f);
         woolBall.GetComponent<Image>().alphaHitTestMinimumThreshold = 0.5f;
-        woolBall.transform.localScale *= Random.Range(0.8f, 1f);
+        woolBall.transform.localScale *= Random.Range(0.5f, 0.7f);
     }
 
     void OnWoolBallClicked()

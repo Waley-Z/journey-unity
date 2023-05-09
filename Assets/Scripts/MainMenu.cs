@@ -37,14 +37,14 @@ public class MainMenu : MonoBehaviour
         {
             levelButtons[i].GetComponent<Image>().alphaHitTestMinimumThreshold = 0.5f;
             levelButtons[i].GetComponent<UIMove>().MoveIn();
-            if (i > GameManager.Instance.Progress)
+            if (i > GameManager.Instance.Progress - 1)
             {
                 levelButtons[i].GetComponent<Button>().interactable = false;
             }
         }
     }
 
-    void OnLevelButtonPressed(int i)
+    void OnLevelButtonPressed(int i) // 0, 1, 2
     {
         foreach (UIMove move in objectsToMove)
         {
@@ -69,7 +69,7 @@ public class MainMenu : MonoBehaviour
         StartCoroutine(Utils.ImageFade(levelButtons[i].GetComponent<Image>(), 1f, 0f));
         StartCoroutine(Utils.ImageFade(ghost, 1f, 0f));
 
-        GameManager.Instance.LoadSceneInSeconds((SceneType)(i + 1), 3f);
+        GameManager.Instance.LoadSceneInSeconds((SceneType)(i + 2), 3f);
 
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
