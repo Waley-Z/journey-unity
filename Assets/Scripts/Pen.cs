@@ -15,6 +15,7 @@ public class Pen : MonoBehaviour
     float countdown;
     int spriteIndex = 0;
     bool isLightOn = false;
+    GameObject sound;
 
     public void TurnLight(bool on)
     {
@@ -27,6 +28,7 @@ public class Pen : MonoBehaviour
         image = GetComponent<Image>();
         image.alphaHitTestMinimumThreshold = 0.5f;
         countdown = spriteInterval;
+        sound = SoundManager.PlaySound(SoundManager.Sound.Pen, loop: true);
     }
 
     void Update()
@@ -54,6 +56,7 @@ public class Pen : MonoBehaviour
         if (AllowClick)
         {
             countdown = float.PositiveInfinity;
+            Destroy(sound);
         }
     }
 }

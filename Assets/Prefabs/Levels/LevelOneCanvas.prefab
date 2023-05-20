@@ -226,6 +226,7 @@ MonoBehaviour:
   distance: 6
   duration: 1
   interval: 3
+  sound: 12
 --- !u!1 &5493621576084903652
 GameObject:
   m_ObjectHideFlags: 0

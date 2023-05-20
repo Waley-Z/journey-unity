@@ -70,6 +70,8 @@ public class LevelThree : MonoBehaviour
 
     IEnumerator EndLevel()
     {
+        StartCoroutine(SoundManager.StartFade(SoundManager.BGM_loop.GetComponent<AudioSource>(), 10f, 0));
+
         typeWritter.StartTypeWrite(texts[2]);
         yield return StartCoroutine(bird.Fly());
 
@@ -82,8 +84,10 @@ public class LevelThree : MonoBehaviour
 
         GameManager.Instance.LoadSceneInSeconds(SceneType.Outro, 3f);
 
-        yield return new WaitForSeconds(3f);
-        Destroy(gameObject);
+        yield return new WaitForSeconds(2f);
+        SoundManager.PlaySound(SoundManager.Sound.NewLevel);
+
+        yield return new WaitForSeconds(1f);
     }
 
     void FadeAll(List<GameObject> gos, float duration, float targetAlpha)

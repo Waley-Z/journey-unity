@@ -23,6 +23,7 @@ public class LevelTwo : MonoBehaviour
     bool specialWoolBallSpawned = false;
     int normalWoolBallSpawned = 0;
     Coroutine showNoteCoroutine;
+    GameObject catSnoreSound;
 
     void Awake()
     {
@@ -40,6 +41,7 @@ public class LevelTwo : MonoBehaviour
     void Start()
     {
         StartCoroutine(SoundManager.Instance.CrossFadeBGM(SoundManager.Sound.MusicLevelTwo, 1f));
+        catSnoreSound = SoundManager.PlaySound(SoundManager.Sound.CatSnore, loop: true);
 
         StartCoroutine(StartLevel());
     }
@@ -102,6 +104,7 @@ public class LevelTwo : MonoBehaviour
 
     public IEnumerator EndLevel()
     {
+        StartCoroutine(SoundManager.StartFade(catSnoreSound.GetComponent<AudioSource>(), 1f, 0));
         foreach (GameObject go in objectsToFadeOut)
         {
             foreach (Image img in go.GetComponentsInChildren<Image>())
@@ -113,6 +116,7 @@ public class LevelTwo : MonoBehaviour
         typeWritter.StartTypeWrite(texts[2]);
 
         yield return new WaitForSeconds(15f);
+
         foreach (UIMove move in objectsToMove)
         {
             move.MoveOut();
@@ -120,12 +124,17 @@ public class LevelTwo : MonoBehaviour
 
         GameManager.Instance.LoadSceneInSeconds(SceneType.MainMenu, 3f);
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
+        SoundManager.PlaySound(SoundManager.Sound.NewLevel);
+
+        yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
 
     public void OnCatClicked()
     {
+        SoundManager.PlaySound(SoundManager.Sound.CatClick);
+
         GameObject woolBall = Instantiate(woolBallPrefab, woolBallBoundary.transform);
         int random = specialWoolBallSpawned ?
             Random.Range(0, normalWoolBallSprites.Count) : Random.Range(0, normalWoolBallSprites.Count + 1);
@@ -141,6 +150,7 @@ public class LevelTwo : MonoBehaviour
         else
         {
             woolBall.GetComponent<Image>().sprite = normalWoolBallSprites[random];
+            woolBall.GetComponent<Button>().onClick.AddListener(() => SoundManager.PlaySound(SoundManager.Sound.DestroyWoolBall));
             normalWoolBallSpawned++;
         }
         Vector3 randomVector3 = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
@@ -151,6 +161,8 @@ public class LevelTwo : MonoBehaviour
 
     void OnWoolBallClicked()
     {
+        SoundManager.PlaySound(SoundManager.Sound.DestroyWoolBall);
+
         foreach (GameObject go in objectsToFadeOut)
         {
             go.SetActive(true);

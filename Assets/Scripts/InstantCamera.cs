@@ -54,7 +54,11 @@ public class InstantCamera : MonoBehaviour
     {
         Debug.Log("OnCameraButtonPressed sceneIdx = " + sceneIdx + ", length = " + iCScenes.Length);
         if (CurrentScene != null && !CurrentScene.ScenePassed)
+        {
+            SoundManager.PlaySound(SoundManager.Sound.InvalidClick);
             return;
+        }
+        SoundManager.PlaySound(SoundManager.Sound.CameraButton);
 
         // end of intro/outro
         if (sceneIdx + 1 == iCScenes.Length)
@@ -109,7 +113,7 @@ public class InstantCamera : MonoBehaviour
     {
         sceneIdx++;
         yield return Utils.ImageFade(flash, 0.1f, 1);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.7f);
 
         mainImage.enabled = true;
         mainImage.sprite = CurrentScene.ICImage;
@@ -132,6 +136,7 @@ public class InstantCamera : MonoBehaviour
         {
             if (gameObject == item.ItemGameObject)
             {
+                SoundManager.PlaySound(SoundManager.Sound.Click);
                 itemLarge.enabled = true;
                 itemLarge.sprite = item.ItemDetailSprite;
                 item.Pressed = true;

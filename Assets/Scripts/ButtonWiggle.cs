@@ -12,6 +12,7 @@ public class ButtonWiggle : MonoBehaviour
     [SerializeField] float distance = 6f;
     [SerializeField] float duration = 1f;
     [SerializeField] float interval = 3f;
+    [SerializeField] SoundManager.Sound sound = SoundManager.Sound.None;
 
     float WiggleCountdown = float.PositiveInfinity;
 
@@ -37,6 +38,9 @@ public class ButtonWiggle : MonoBehaviour
 
     IEnumerator WiggleButton()
     {
+        if (sound != SoundManager.Sound.None)
+            SoundManager.PlaySound(sound);
+
         float time = 0f;
         Vector3 rot = button.localEulerAngles;
 

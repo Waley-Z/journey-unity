@@ -560,7 +560,7 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 1e24afea78a2431408115d6682b2a961, type: 3}
   - sound: 7
     mixer: {fileID: -5874950323116037418, guid: 59b20a9b830d04ff2a2db56b96cfefca, type: 2}
-    audioClip: {fileID: 8300000, guid: be2a75a8f80484a2982befacbfbdb9a1, type: 3}
+    audioClip: {fileID: 8300000, guid: b1987849d7c5644ff85a3630741a5612, type: 3}
   - sound: 8
     mixer: {fileID: -5874950323116037418, guid: 59b20a9b830d04ff2a2db56b96cfefca, type: 2}
     audioClip: {fileID: 8300000, guid: 42b8bc3cddf831d4e8f7cfcad12adfee, type: 3}
@@ -1731,10 +1731,6 @@ PrefabInstance:
     - target: {fileID: 1437378611168888995, guid: 2400ef3790c3de54681883d596f0b71e, type: 3}
       propertyPath: parameter
       value: MusicVolume
-      objectReference: {fileID: 0}
-    - target: {fileID: 3373094616693039402, guid: 2400ef3790c3de54681883d596f0b71e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -28.240015
       objectReference: {fileID: 0}
     - target: {fileID: 3373094617825565950, guid: 2400ef3790c3de54681883d596f0b71e, type: 3}
       propertyPath: m_Pivot.x

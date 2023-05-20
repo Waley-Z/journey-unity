@@ -45,7 +45,9 @@ public class SoundManager : MonoBehaviour
 
         TagFall,
         TagWiggle,
-        Bird
+        Bird,
+
+        None
     }
 
     public static GameObject BGM_loop;
@@ -73,7 +75,7 @@ public class SoundManager : MonoBehaviour
     }
 
     // play one shot
-    public static GameObject PlaySound(Sound sound, float volume = 1f)
+    public static GameObject PlaySound(Sound sound, float volume = 1f, bool loop = false)
     {
         if (CanPlaySound(sound))
         {
@@ -83,9 +85,19 @@ public class SoundManager : MonoBehaviour
             audioSource.volume = volume;
             SoundAudioClip soundAudioClip = GetSoundAudioClip(sound);
             audioSource.outputAudioMixerGroup = soundAudioClip.mixer;
-            audioSource.PlayOneShot(soundAudioClip.audioClip);
 
-            Destroy(soundGameObject, soundAudioClip.audioClip.length); // destroy after length of soundclip
+            if (loop)
+            {
+                audioSource.clip = soundAudioClip.audioClip;
+                audioSource.loop = true;
+                audioSource.Play();
+            }
+            else
+            {
+                audioSource.PlayOneShot(soundAudioClip.audioClip);
+                Destroy(soundGameObject, soundAudioClip.audioClip.length); // destroy after length of soundclip
+            }
+
             return soundGameObject;
         }
         return null;

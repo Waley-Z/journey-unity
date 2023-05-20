@@ -16,11 +16,13 @@ public class Bird : MonoBehaviour
     Image image;
     int spriteIndex = 0;
     bool flying = false;
+    GameObject sound;
 
     public IEnumerator Fly()
     {
         if (flying) yield break;
         flying = true;
+        sound = SoundManager.PlaySound(SoundManager.Sound.Bird);
         countdown = 0;
         yield return new WaitForSeconds(2f);
         StartCoroutine(Utils.ObjectFollowPath(transform, 2f, path));

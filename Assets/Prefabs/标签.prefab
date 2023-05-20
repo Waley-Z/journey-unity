@@ -152,6 +152,7 @@ MonoBehaviour:
   distance: 6
   duration: 1
   interval: Infinity
+  sound: 18
 --- !u!50 &8217213484855025852
 Rigidbody2D:
   serializedVersion: 4

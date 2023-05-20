@@ -30,6 +30,7 @@ public class Thorn : MonoBehaviour
         tagButton.WiggleInSeconds(0f);
         yield return new WaitForSeconds(1.1f);
         tagButton.GetComponent<Rigidbody2D>().simulated = true;
+        SoundManager.PlaySound(SoundManager.Sound.TagFall);
         StartCoroutine(Utils.ImageFade(tagButton.GetComponent<Image>(), 1.1f, 0f));
 
         yield return new WaitForSeconds(2f);

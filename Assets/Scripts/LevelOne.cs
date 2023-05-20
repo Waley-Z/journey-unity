@@ -24,6 +24,7 @@ public class LevelOne : MonoBehaviour
 
     StickMan man1, man2;
     IEnumerator flickering;
+    GameObject whisper1, whisper2;
 
     void Awake()
     {
@@ -120,6 +121,7 @@ public class LevelOne : MonoBehaviour
         Coroutine walk1 = StartCoroutine(man1.StartWalk());
 
         StartCoroutine(ScaleBubbles(true, greenBubbles.GetComponentsInChildren<UIScale>()));
+        whisper1 = SoundManager.PlaySound(SoundManager.Sound.Whisper1, loop: true);
 
         yield return walk1;
         yield return walk2;
@@ -136,6 +138,7 @@ public class LevelOne : MonoBehaviour
 
         StartCoroutine(ScaleBubbles(false, greenBubbles.GetComponentsInChildren<UIScale>(), 0.5f, 1.5f));
         StartCoroutine(ScaleBubbles(true, redBubbles.GetComponentsInChildren<UIScale>(), 0.5f, 1.5f));
+        whisper2 = SoundManager.PlaySound(SoundManager.Sound.Whisper2, loop: true);
 
         yield return new WaitForSeconds(1f);
 
@@ -150,6 +153,9 @@ public class LevelOne : MonoBehaviour
 
     IEnumerator EndLevel()
     {
+        Destroy(whisper1);
+        Destroy(whisper2);
+
         typeWritter.StartTypeWrite(texts[3]);
 
         yield return new WaitForSeconds(1f);
@@ -164,7 +170,8 @@ public class LevelOne : MonoBehaviour
             Destroy(man2.gameObject);
         }
 
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(7f);
+
         foreach (UIMove move in objectsToMove)
         {
             move.MoveOut();
@@ -172,7 +179,10 @@ public class LevelOne : MonoBehaviour
 
         GameManager.Instance.LoadSceneInSeconds(SceneType.MainMenu, 3f);
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
+        SoundManager.PlaySound(SoundManager.Sound.NewLevel);
+
+        yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
 
@@ -193,6 +203,7 @@ public class LevelOne : MonoBehaviour
 
     public void OnBubbleDestroyed()
     {
+        SoundManager.PlaySound(SoundManager.Sound.DestroyBubble);
         if (GameObject.FindGameObjectsWithTag("RedBubble").Length <= 1)
         {
             StartCoroutine(EndLevel());
