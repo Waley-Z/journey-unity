@@ -59,4 +59,9 @@ public class Pen : MonoBehaviour
             Destroy(sound);
         }
     }
+
+    void OnDestroy()
+    {
+        Destroy(sound);
+    }
 }

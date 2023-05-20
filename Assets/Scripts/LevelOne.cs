@@ -179,6 +179,7 @@ public class LevelOne : MonoBehaviour
 
         GameManager.Instance.LoadSceneInSeconds(SceneType.MainMenu, 3f);
 
+        StartCoroutine(SoundManager.StartFade(SoundManager.BGM_loop.GetComponent<AudioSource>(), 2f, 0));
         yield return new WaitForSeconds(2f);
         SoundManager.PlaySound(SoundManager.Sound.NewLevel);
 

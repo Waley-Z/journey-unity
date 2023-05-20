@@ -84,6 +84,7 @@ public class LevelThree : MonoBehaviour
 
         GameManager.Instance.LoadSceneInSeconds(SceneType.Outro, 3f);
 
+        StartCoroutine(SoundManager.StartFade(bird.sound.GetComponent<AudioSource>(), 2f, 0));
         yield return new WaitForSeconds(2f);
         SoundManager.PlaySound(SoundManager.Sound.NewLevel);
 

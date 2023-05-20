@@ -11,12 +11,12 @@ public class Bird : MonoBehaviour
     [SerializeField] GameObject birdPath;
 
     public float countdown;
+    public GameObject sound;
 
     PathCreator path;
     Image image;
     int spriteIndex = 0;
     bool flying = false;
-    GameObject sound;
 
     public IEnumerator Fly()
     {
