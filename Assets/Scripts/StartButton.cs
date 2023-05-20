@@ -17,6 +17,8 @@ public class StartButton : MonoBehaviour
 
     public void OnClicked()
     {
+        StartCoroutine(SoundManager.Instance.CrossFadeBGM(SoundManager.Sound.MusicIntroOutro, 1f));
+
         foreach (GameObject go in gameObjectsToFade)
         {
             foreach (CanvasRenderer renderer in go.GetComponentsInChildren<CanvasRenderer>())

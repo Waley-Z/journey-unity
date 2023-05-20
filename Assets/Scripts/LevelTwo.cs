@@ -39,6 +39,8 @@ public class LevelTwo : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(SoundManager.Instance.CrossFadeBGM(SoundManager.Sound.MusicLevelTwo, 1f));
+
         StartCoroutine(StartLevel());
     }
 

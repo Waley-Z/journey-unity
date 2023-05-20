@@ -24,6 +24,8 @@ public class LevelThree : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(SoundManager.Instance.CrossFadeBGM(SoundManager.Sound.MusicLevelThree, 1f));
+
         foreach (Button button in tags.GetComponentsInChildren<Button>())
         {
             button.onClick.AddListener(() => typeWritter.StartTypeWrite(texts[0]));

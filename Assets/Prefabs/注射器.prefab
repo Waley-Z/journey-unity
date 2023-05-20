@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 28.240002, y: 0}
+  m_AnchoredPosition: {x: 28.240028, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3373094616693039404
@@ -229,6 +229,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3373094617825565950}
+  - component: {fileID: 1437378611168888995}
   m_Layer: 5
   m_Name: "\u6CE8\u5C04\u5668"
   m_TagString: Untagged
@@ -258,3 +259,20 @@ RectTransform:
   m_AnchoredPosition: {x: 289.53, y: 242.5}
   m_SizeDelta: {x: 198.56, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1437378611168888995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3373094617825565951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c67bb4619f8e245158431b6e4bc79ab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 59b20a9b830d04ff2a2db56b96cfefca, type: 2}
+  parameter: 
+  minX: -28.2401
+  maxX: 28.2401
+  slider: {fileID: 3373094616693039402}

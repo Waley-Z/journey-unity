@@ -29,6 +29,8 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(SoundManager.Instance.CrossFadeBGM(SoundManager.Sound.MusicStartMainMenu, 2f));
+
         foreach (UIMove move in objectsToMove)
         {
             move.MoveIn();

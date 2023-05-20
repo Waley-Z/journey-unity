@@ -11,6 +11,8 @@ public class Outro : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(SoundManager.Instance.CrossFadeBGM(SoundManager.Sound.MusicIntroOutro, 1f));
+
         foreach (UIMove move in FindObjectOfType<Background>().moves)
         {
             move.MoveIn();
